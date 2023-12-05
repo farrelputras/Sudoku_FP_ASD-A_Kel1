@@ -106,6 +106,19 @@ public class GameBoardPanel extends JPanel {
              * Check if the player has solved the puzzle after this move,
              *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
              */
+            // Memperbarui status sel berdasarkan input
+if (numberIn == sourceCell.number) {
+    sourceCell.status = CellStatus.CORRECT_GUESS;
+} else {
+    sourceCell.status = CellStatus.WRONG_GUESS;
+}
+sourceCell.paint(); // Menggambar ulang sel berdasarkan statusnya
+
+// Memeriksa apakah puzzle sudah selesai
+if (isSolved()) {
+    JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
+}
+
         }
     }
     // .........
