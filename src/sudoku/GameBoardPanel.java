@@ -101,25 +101,15 @@ public class GameBoardPanel extends JPanel {
             }
             sourceCell.paint();   // re-paint this cell based on its status
 
-            /*
+            /**
              * [TODO 6] (later)
              * Check if the player has solved the puzzle after this move,
              *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
              */
-            // Memperbarui status sel berdasarkan input
-if (numberIn == sourceCell.number) {
-    sourceCell.status = CellStatus.CORRECT_GUESS;
-} else {
-    sourceCell.status = CellStatus.WRONG_GUESS;
-}
-sourceCell.paint(); // Menggambar ulang sel berdasarkan statusnya
-
-// Memeriksa apakah puzzle sudah selesai
-if (isSolved()) {
-    JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
-}
-
+            // Memeriksa apakah puzzle sudah selesai
+            if (isSolved()) {
+                JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
+            }
         }
     }
-    // .........
 }

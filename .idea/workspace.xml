@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="TODO 4">
+    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="TODO 5">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,12 +85,20 @@
       <option name="project" value="LOCAL" />
       <updated>1701743337185</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="TODO 5">
+      <created>1701743634285</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701743634285</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="TODO 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO 4" />
+    <MESSAGE value="TODO 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO 5" />
   </component>
 </project>
