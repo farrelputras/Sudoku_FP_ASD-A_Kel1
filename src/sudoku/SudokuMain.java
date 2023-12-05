@@ -33,6 +33,11 @@ public class SudokuMain extends JFrame {
     /** The entry main() entry method */
     public static void main(String[] args) {
         // [TODO 1] Check "Swing program template" on how to run
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SudokuMain();  // Let the constructor do the job
+            }
+        });
         //  the constructor of "SudokuMain"
         // .........
     }
