@@ -1,70 +1,82 @@
+// GameBoardPanel.java
 package sudoku;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class GameBoardPanel extends JPanel {
-    private static final long serialVersionUID = 1L;  // to prevent serial warning
+    private static final long serialVersionUID = 1L;
 
-    // Define named constants for UI sizes
-    public static final int CELL_SIZE = 60;   // Cell width/height in pixels
+    public static final int CELL_SIZE = 60;
     public static final int BOARD_WIDTH  = CELL_SIZE * SudokuConstants.GRID_SIZE;
     public static final int BOARD_HEIGHT = CELL_SIZE * SudokuConstants.GRID_SIZE;
-    // Board width/height in pixels
 
-    // Define properties
-    /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
-    /** It also contains a Puzzle with array numbers and isGiven */
     private Puzzle puzzle = new Puzzle();
+    private Image backgroundImage;
+    private Timer timer;
+    private int totalSeconds;
+    private JLabel timerLabel;
+    private JPanel timerPanel = new JPanel();
+    private JPanel sudokuGrid = new JPanel();
 
-    /** Constructor */
     public GameBoardPanel() {
-        super.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));  // JPanel
+        super.setLayout(new BorderLayout());
 
-        // Allocate the 2D array of Cell, and added into JPanel.
+        super.add(timerPanel, BorderLayout.NORTH);
+        super.add(sudokuGrid, BorderLayout.CENTER);
+        sudokuGrid.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));
+
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col] = new Cell(row, col);
-                super.add(cells[row][col]);   // JPanel
+                sudokuGrid.add(cells[row][col]);
             }
         }
 
-        // [TODO 3]
         CellInputListener listener = new CellInputListener();
 
-        // [TODO 4]
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 if (cells[row][col].isEditable()) {
-                    cells[row][col].addActionListener(listener);   // For all editable rows and cols
+                    cells[row][col].addActionListener(listener);
                 }
             }
         }
 
-        super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+
+        setBackgroundImage("wallpaperflare.com_wallpaper (2).jpg");
+
+        // Initialize timer
+        totalSeconds = 0;
+        timerLabel = new JLabel("Timer: 0s");
+        timerLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        timerPanel.add(timerLabel);
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                totalSeconds++;
+                updateTimerLabel();
+            }
+        });
     }
 
-    /**
-     * Generate a new puzzle; and reset the gameboard of cells based on the puzzle.
-     * You can call this method to start a new game.
-     */
     public void newGame() {
-        // Generate a new puzzle
         puzzle.newPuzzle(2);
+        totalSeconds = 0; // Reset the timer when starting a new game
 
-        // Initialize all the 9x9 cells, based on the puzzle.
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
             }
         }
+
+        startTimer();
     }
 
-    /**
-     * Return true if the puzzle is solved
-     * i.e., none of the cell have status of TO_GUESS or WRONG_GUESS
-     */
     public boolean isSolved() {
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
@@ -76,40 +88,50 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
-    // [TODO 2] Define a Listener Inner Class for all the editable Cells
     private class CellInputListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Get a reference of the JTextField that triggers this action event
             Cell sourceCell = (Cell)e.getSource();
-
-            // Retrieve the int entered
             int numberIn = Integer.parseInt(sourceCell.getText());
-            // For debugging
             System.out.println("You entered " + numberIn);
 
-            /**
-             * [TODO 5] (later - after TODO 3 and 4)
-             * Check the numberIn against sourceCell.number.
-             * Update the cell status sourceCell.status,
-             * and re-paint the cell via sourceCell.paint().
-             */
             if (numberIn == sourceCell.number) {
-               sourceCell.status = CellStatus.CORRECT_GUESS;
+                sourceCell.status = CellStatus.CORRECT_GUESS;
             } else {
-               sourceCell.status = CellStatus.WRONG_GUESS;
+                sourceCell.status = CellStatus.WRONG_GUESS;
             }
-            sourceCell.paint();   // re-paint this cell based on its status
+            sourceCell.paint();
 
-            /**
-             * [TODO 6] (later)
-             * Check if the player has solved the puzzle after this move,
-             *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
-             */
-            // Memeriksa apakah puzzle sudah selesai
             if (isSolved()) {
                 JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
+                stopTimer();
             }
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        super.paintComponent(g);
+    }
+
+    public void setBackgroundImage(String imagePath) {
+        ImageIcon icon = new ImageIcon(imagePath);
+        backgroundImage = icon.getImage();
+    }
+
+    public void startTimer() {
+        timer.start();
+    }
+
+    public void stopTimer() {
+        timer.stop();
+    }
+
+    public void updateTimerLabel() {
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
+        timerLabel.setText(String.format("Timer: %02d:%02d:%02d", hours, minutes, seconds));
     }
 }

@@ -1,44 +1,56 @@
+// SudokuMain.java
 package sudoku;
+
 import java.awt.*;
 import javax.swing.*;
-/**
- * The main Sudoku program
- */
+
 public class SudokuMain extends JFrame {
-    private static final long serialVersionUID = 1L;  // to prevent serial warning
+    private static final long serialVersionUID = 1L;
 
-    // private variables
-    GameBoardPanel board = new GameBoardPanel();
-    JButton btnNewGame = new JButton("New Game");
+    private static SudokuMain instance;
+    private GameBoardPanel board;
 
-    // Constructor
-    public SudokuMain() {
+    public static SudokuMain getInstance() {
+        if (instance == null) {
+            instance = new SudokuMain();
+        }
+        return instance;
+    }
+
+    private SudokuMain() {
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
-        cp.add(board, BorderLayout.CENTER);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        // Add a button to the south to re-start the game via board.newGame()
-        // ......
+        board = new GameBoardPanel();
+        mainPanel.add(board, BorderLayout.CENTER);
 
-        // Initialize the game board to start the game
+        JButton btnNewGame = new JButton("New Game");
+        btnNewGame.addActionListener(e -> {
+            board.newGame();
+        });
+        mainPanel.add(btnNewGame, BorderLayout.SOUTH);
+
+        cp.add(mainPanel, BorderLayout.CENTER);
+
+        board.startTimer();
         board.newGame();
 
-        pack();     // Pack the UI components, instead of using setSize()
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // to handle window-closing
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Sudoku");
         setVisible(true);
     }
 
-    /** The entry main() entry method */
+    public GameBoardPanel getGameBoardPanel() {
+        return board;
+    }
+
     public static void main(String[] args) {
-        // [TODO 1] Check "Swing program template" on how to run
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new SudokuMain();  // Let the constructor do the job
-            }
+        SwingUtilities.invokeLater(() -> {
+            SudokuMain.getInstance();
         });
-        //  the constructor of "SudokuMain"
-        // .........
     }
 }
