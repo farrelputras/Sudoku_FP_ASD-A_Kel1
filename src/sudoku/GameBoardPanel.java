@@ -22,8 +22,9 @@ import javax.swing.border.MatteBorder;
 public class GameBoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     public static final int CELL_SIZE = 60;
-    public static final int BOARD_WIDTH  = CELL_SIZE * SudokuConstants.GRID_SIZE;
-    public static final int BOARD_HEIGHT = CELL_SIZE * SudokuConstants.GRID_SIZE;
+    public static final int BOARD_SIZE = CELL_SIZE * SudokuConstants.GRID_SIZE;
+    public static final int BOARD_WIDTH  = BOARD_SIZE;
+    public static final int BOARD_HEIGHT = BOARD_SIZE;
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     private Puzzle puzzle = new Puzzle();
     private Image backgroundImage;
