@@ -1,4 +1,3 @@
-// GameBoardPanel.java
 package sudoku;
 
 /**
@@ -34,9 +33,13 @@ public class GameBoardPanel extends JPanel {
     private JPanel timerPanel = new JPanel();
     private JPanel sudokuGrid = new JPanel();
 
+    private int wrongGuessCount;
+
     public GameBoardPanel() {
         super.setLayout(new BorderLayout());
-
+        // ... (kode yang sudah ada)
+        // Inisialisasi variabel wrongGuessCount
+        wrongGuessCount = 0;
         super.add(timerPanel, BorderLayout.NORTH);
         super.add(sudokuGrid, BorderLayout.CENTER);
 
@@ -117,24 +120,37 @@ public class GameBoardPanel extends JPanel {
     private class CellInputListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Cell sourceCell = (Cell)e.getSource();
-            int numberIn = Integer.parseInt(sourceCell.getText());
+            Cell sourceCell = (Cell) e.getSource();
+            int numberIn;
+            try {
+                numberIn = Integer.parseInt(sourceCell.getText());
+            } catch (NumberFormatException ex) {
+                // Handle jika input bukan angka
+                return;
+            }
+
             System.out.println("You entered " + numberIn);
 
             if (numberIn == sourceCell.number) {
                 sourceCell.status = CellStatus.CORRECT_GUESS;
             } else {
                 sourceCell.status = CellStatus.WRONG_GUESS;
+                wrongGuessCount++;
+
+                // Cek apakah sudah mencapai 5 kesalahan
+                if (wrongGuessCount >= 5) {
+                    handleGameOver();
+                }
             }
             sourceCell.paint();
 
+            // Memanggil isSolved() dari instance GameBoardPanel yang sama
             if (isSolved()) {
                 JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
                 stopTimer();
             }
         }
     }
-
 
     public void startTimer() {
         timer.start();
@@ -150,4 +166,9 @@ public class GameBoardPanel extends JPanel {
         int seconds = totalSeconds % 60;
         timerLabel.setText(String.format("Timer: %02d:%02d:%02d", hours, minutes, seconds));
     }
+    private void handleGameOver() {
+        JOptionPane.showMessageDialog(null, "Game Over! You've made 5 wrong guesses. Starting a new game.");
+        newGame();  // Mulai permainan baru setelah mencapai batas kesalahan
+    }
+
 }

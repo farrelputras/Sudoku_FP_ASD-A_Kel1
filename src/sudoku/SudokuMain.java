@@ -1,4 +1,3 @@
-// SudokuMain.java
 package sudoku;
 
 /**
