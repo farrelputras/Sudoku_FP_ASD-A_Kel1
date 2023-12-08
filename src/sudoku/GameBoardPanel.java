@@ -4,14 +4,16 @@ package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class GameBoardPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-
     public static final int CELL_SIZE = 60;
     public static final int BOARD_WIDTH  = CELL_SIZE * SudokuConstants.GRID_SIZE;
     public static final int BOARD_HEIGHT = CELL_SIZE * SudokuConstants.GRID_SIZE;
-
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     private Puzzle puzzle = new Puzzle();
     private Image backgroundImage;
@@ -26,30 +28,35 @@ public class GameBoardPanel extends JPanel {
 
         super.add(timerPanel, BorderLayout.NORTH);
         super.add(sudokuGrid, BorderLayout.CENTER);
+
         sudokuGrid.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));
 
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col] = new Cell(row, col);
                 sudokuGrid.add(cells[row][col]);
-            }
-        }
 
-        CellInputListener listener = new CellInputListener();
+                // Add black borders to cells
+                cells[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
-            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                // Add right and bottom borders for grid separation
+                if ((col + 1) % 3 == 0 && col < SudokuConstants.GRID_SIZE - 1) {
+                    Border border = new MatteBorder(0, 0, 0, 2, Color.BLACK);
+                    cells[row][col].setBorder(new CompoundBorder(cells[row][col].getBorder(), border));
+                }
+                if ((row + 1) % 3 == 0 && row < SudokuConstants.GRID_SIZE - 1) {
+                    Border border = new MatteBorder(0, 0, 2, 0, Color.BLACK);
+                    cells[row][col].setBorder(new CompoundBorder(cells[row][col].getBorder(), border));
+                }
+
+                // Add action listener to editable cells
                 if (cells[row][col].isEditable()) {
-                    cells[row][col].addActionListener(listener);
+                    cells[row][col].addActionListener(new CellInputListener());
                 }
             }
         }
 
-        setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-
-        setBackgroundImage("wallpaperflare.com_wallpaper (2).jpg");
-
-        // Initialize timer
+        // Timer initialization
         totalSeconds = 0;
         timerLabel = new JLabel("Timer: 0s");
         timerLabel.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -62,7 +69,15 @@ public class GameBoardPanel extends JPanel {
                 updateTimerLabel();
             }
         });
+        timer.start(); // Start the timer
+
+        // Set preferred size and border of the entire panel
+        super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        super.setBorder(new LineBorder(Color.BLACK, 3));
     }
+
+
+
 
     public void newGame() {
         puzzle.newPuzzle(2);
@@ -109,16 +124,6 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        super.paintComponent(g);
-    }
-
-    public void setBackgroundImage(String imagePath) {
-        ImageIcon icon = new ImageIcon(imagePath);
-        backgroundImage = icon.getImage();
-    }
 
     public void startTimer() {
         timer.start();
