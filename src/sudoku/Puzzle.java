@@ -13,6 +13,7 @@ package sudoku;
 /**
  * The Sudoku number puzzle to be solved
  */
+import javax.swing.*;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -23,6 +24,16 @@ public class Puzzle {
     public Puzzle() {
         super();
     }
+
+//    public void sel(int row, int col, int value) {
+//        super();   // JTextField
+//        Cell cell = new Cell();
+//        cell.
+//        this.col = col;
+//        // Inherited from JTextField: Beautify all the cells once for all
+//        super.setHorizontalAlignment(JTextField.CENTER);
+//        super.setFont(FONT_NUMBERS);
+//    }
 
     public void newPuzzle(int cellsToGuess) {
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
@@ -110,7 +121,7 @@ public class Puzzle {
         Stack<Cell> cellStack = new Stack<>();
         int curRow = 0, curCol = 0, curValue = 1, time = 0;
 
-        while (cellStack.size() < GRID_SIZE * GRID_SIZE) {
+        while (cellStack.size() < SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) {
             time++;
 
             if (isGiven[curRow][curCol]) {
@@ -122,14 +133,14 @@ public class Puzzle {
             }
 
             boolean foundValidValue = false;
-            for (curValue = curValue; curValue <= GRID_SIZE; curValue++) {
+            for (curValue = curValue; curValue <= SudokuConstants.GRID_SIZE; curValue++) {
                 if (isValidPlacement(curRow, curCol, curValue)) {
                     foundValidValue = true;
                     break;
                 }
             }
 
-            if (foundValidValue && curValue <= GRID_SIZE) {
+            if (foundValidValue && curValue <= SudokuConstants.GRID_SIZE) {
                 numbers[curRow][curCol] = curValue;
                 cellStack.push(new Cell(curRow, curCol, curValue));
                 int[] next = getNextCell(curRow, curCol);
@@ -179,6 +190,20 @@ public class Puzzle {
             }
         }
         return true;
+    }
+
+    private int[] getNextCell(int row, int col) {
+        // Implementasi metode getNextCell untuk mendapatkan selanjutnya dari koordinat row dan col
+        // Misalnya:
+        int[] nextCell = new int[2];
+        col++; // Misalnya, pindah ke selanjutnya di kolom yang sama
+        if (col == SudokuConstants.GRID_SIZE) {
+            col = 0;
+            row++; // Pindah ke baris berikutnya jika sudah mencapai batas kolom
+        }
+        nextCell[0] = row;
+        nextCell[1] = col;
+        return nextCell;
     }
     private void setGuesses(int cellsToGuess) {
         int targetFilledCells = cellsToGuess + (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 2; // Menargetkan lebih banyak kotak yang terisi
