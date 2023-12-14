@@ -47,7 +47,8 @@ public class GameBoardPanel extends JPanel {
 
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
-                cells[row][col] = new Cell(row, col);
+                int value = 0;
+                cells[row][col] = new Cell(row, col, value);
                 sudokuGrid.add(cells[row][col]);
 
                 // Add black borders to cells
