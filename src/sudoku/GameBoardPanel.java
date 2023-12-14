@@ -152,6 +152,7 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
+
     public void startTimer() {
         timer.start();
     }
@@ -168,7 +169,9 @@ public class GameBoardPanel extends JPanel {
     }
     private void handleGameOver() {
         JOptionPane.showMessageDialog(null, "Game Over! You've made 5 wrong guesses. Starting a new game.");
-        newGame();  // Mulai permainan baru setelah mencapai batas kesalahan
+        newGame();  // Memulai permainan baru setelah mencapai batas kesalahan
+        wrongGuessCount = 0;  // Mereset jumlah kesalahan
     }
+
 
 }
