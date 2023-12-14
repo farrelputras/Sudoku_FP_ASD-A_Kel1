@@ -51,6 +51,7 @@ public class SudokuMain extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Sudoku");
         setVisible(true);
+        setResizable(false);
     }
 
     public GameBoardPanel getGameBoardPanel() {
