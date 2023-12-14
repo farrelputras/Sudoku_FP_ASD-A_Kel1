@@ -31,7 +31,7 @@ public class Puzzle {
                 isGiven[row][col] = false;
             }
         }
-        solveSudoku();
+        solve();
         setGuesses(cellsToGuess);
         randomNumbers();
     }
@@ -105,33 +105,61 @@ public class Puzzle {
         }
         return true;
     }
-    private void solveSudoku() {
-        solve(0, 0);
-    }
 
-    private boolean solve(int row, int col) {
-        if (col == SudokuConstants.GRID_SIZE) {
-            col = 0;
-            row++;
-            if (row == SudokuConstants.GRID_SIZE) {
-                return true;
+    private boolean solve() {
+        Stack<Cell> cellStack = new Stack<>();
+        int curRow = 0, curCol = 0, curValue = 1, time = 0;
+
+        while (cellStack.size() < GRID_SIZE * GRID_SIZE) {
+            time++;
+
+            if (isGiven[curRow][curCol]) {
+                cellStack.push(new Cell(curRow, curCol, numbers[curRow][curCol]));
+                int[] next = getNextCell(curRow, curCol);
+                curRow = next[0];
+                curCol = next[1];
+                continue;
             }
-        }
 
-        if (numbers[row][col] != 0) {
-            return solve(row, col + 1);
-        }
-
-        for (int num = 1; num <= SudokuConstants.GRID_SIZE; num++) {
-            if (isValidPlacement(row, col, num)) {
-                numbers[row][col] = num;
-                if (solve(row, col + 1)) {
-                    return true;
+            boolean foundValidValue = false;
+            for (curValue = curValue; curValue <= GRID_SIZE; curValue++) {
+                if (isValidPlacement(curRow, curCol, curValue)) {
+                    foundValidValue = true;
+                    break;
                 }
-                numbers[row][col] = 0;
+            }
+
+            if (foundValidValue && curValue <= GRID_SIZE) {
+                numbers[curRow][curCol] = curValue;
+                cellStack.push(new Cell(curRow, curCol, curValue));
+                int[] next = getNextCell(curRow, curCol);
+                curRow = next[0];
+                curCol = next[1];
+                curValue = 1;
+            } else {
+                if (!cellStack.isEmpty()) {
+                    Cell cell = cellStack.pop();
+                    while (isGiven[cell.getRow()][cell.getCol()]) {
+                        if (!cellStack.isEmpty()) {
+                            cell = cellStack.pop();
+                        } else {
+                            System.out.println("Number of steps: " + time);
+                            return false;
+                        }
+                    }
+                    curRow = cell.getRow();
+                    curCol = cell.getCol();
+                    curValue = cell.getValue() + 1;
+                    numbers[curRow][curCol] = 0;
+                } else {
+                    System.out.println("Number of steps: " + time);
+                    return false;
+                }
             }
         }
-        return false;
+
+        System.out.println("Number of steps taken: " + time);
+        return true;
     }
 
     private boolean isValidPlacement(int row, int col, int num) {
