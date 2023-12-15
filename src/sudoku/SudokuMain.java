@@ -54,10 +54,6 @@ public class SudokuMain extends JFrame {
         setResizable(false);
     }
 
-    public GameBoardPanel getGameBoardPanel() {
-        return board;
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             SudokuMain.getInstance();

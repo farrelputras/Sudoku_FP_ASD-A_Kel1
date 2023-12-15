@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="timer">
+    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="onyx ubah dikit">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sudoku/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/CellStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/SudokuGameManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sudoku/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Puzzle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +31,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="24acdc00-8f4a-406f-a1df-1e2889b28d24" />
+        <option name="url" value="https://github.com/farrelputras/Sudoku_FP_ASD-A_Kel1.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

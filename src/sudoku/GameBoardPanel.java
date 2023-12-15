@@ -37,9 +37,7 @@ public class GameBoardPanel extends JPanel {
 
     public GameBoardPanel() {
         super.setLayout(new BorderLayout());
-        // ... (kode yang sudah ada)
-        // Inisialisasi variabel wrongGuessCount
-        wrongGuessCount = 0;
+        wrongGuessCount = 0; //reset the wrong counter
         super.add(timerPanel, BorderLayout.NORTH);
         super.add(sudokuGrid, BorderLayout.CENTER);
 

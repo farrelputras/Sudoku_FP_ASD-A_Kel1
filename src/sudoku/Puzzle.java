@@ -25,16 +25,6 @@ public class Puzzle {
         super();
     }
 
-//    public void sel(int row, int col, int value) {
-//        super();   // JTextField
-//        Cell cell = new Cell();
-//        cell.
-//        this.col = col;
-//        // Inherited from JTextField: Beautify all the cells once for all
-//        super.setHorizontalAlignment(JTextField.CENTER);
-//        super.setFont(FONT_NUMBERS);
-//    }
-
     public void newPuzzle(int cellsToGuess) {
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
@@ -193,20 +183,18 @@ public class Puzzle {
     }
 
     private int[] getNextCell(int row, int col) {
-        // Implementasi metode getNextCell untuk mendapatkan selanjutnya dari koordinat row dan col
-        // Misalnya:
         int[] nextCell = new int[2];
-        col++; // Misalnya, pindah ke selanjutnya di kolom yang sama
+        col++;
         if (col == SudokuConstants.GRID_SIZE) {
             col = 0;
-            row++; // Pindah ke baris berikutnya jika sudah mencapai batas kolom
+            row++;
         }
         nextCell[0] = row;
         nextCell[1] = col;
         return nextCell;
     }
     private void setGuesses(int cellsToGuess) {
-        int targetFilledCells = cellsToGuess + (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 2; // Menargetkan lebih banyak kotak yang terisi
+        int targetFilledCells = cellsToGuess + (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 2; //number of cells to be fillede
         Stack<Integer> indexes = new Stack<>();
         for (int i = 0; i < SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE; i++) {
             indexes.push(i);

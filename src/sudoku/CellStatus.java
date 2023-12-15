@@ -1,4 +1,5 @@
 package sudoku;
+
 /**
  * ES234317-Algorithm and Data Structures
  * Semester Ganjil, 2023/2024
