@@ -12,12 +12,14 @@ package sudoku;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class SudokuMain extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private static SudokuMain instance;
     private GameBoardPanel board;
+//    private Solve solve;
 
     public static SudokuMain getInstance() {
         if (instance == null) {
@@ -43,6 +45,12 @@ public class SudokuMain extends JFrame {
         mainPanel.add(btnNewGame, BorderLayout.SOUTH);
 
         cp.add(mainPanel, BorderLayout.CENTER);
+
+//        JButton solveBtn = new JButton("Solve");
+//        solveBtn.addActionListener(e -> {
+//            solve.solveSudoku();
+//        });
+//        cp.add(solveBtn, BorderLayout.SOUTH);
 
         board.startTimer();
         board.newGame();

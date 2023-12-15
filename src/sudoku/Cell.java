@@ -33,18 +33,18 @@ public class Cell extends JTextField {
 
     // Define properties (package-visible)
     /** The row and column number [0-8] of this cell */
-    int row, col, value;
+    private int row, col;
     /** The puzzle number [1-9] for this cell */
     int number;
     /** The status of this cell defined in enum CellStatus */
     CellStatus status;
 
     /** Constructor */
-    public Cell(int row, int col, int value) {
+    public Cell(int row, int col, int number) {
         super();   // JTextField
         this.row = row;
         this.col = col;
-        this.value = value;
+        this.number = number;
         // Inherited from JTextField: Beautify all the cells once for all
         super.setHorizontalAlignment(JTextField.CENTER);
         super.setFont(FONT_NUMBERS);
@@ -58,8 +58,8 @@ public class Cell extends JTextField {
         return col;
     }
 
-    public int getValue(){
-        return value;
+    public int getNum(){
+        return number;
     }
 
     /** Reset this cell for a new game, given the puzzle number and isGiven */

@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="onyx ubah dikit">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="adjustment">
+      <change afterPath="$PROJECT_DIR$/src/sudoku/Solve.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/CellStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/CellStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/GameBoardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sudoku/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sudoku/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Puzzle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" afterDir="false" />
     </list>
@@ -123,7 +122,28 @@
       <option name="project" value="LOCAL" />
       <updated>1702030976151</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="adjustment">
+      <created>1702608405130</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702608405130</updated>
+    </task>
+    <task id="LOCAL-00009" summary="adjustment">
+      <created>1702608592825</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1702608592825</updated>
+    </task>
+    <task id="LOCAL-00010" summary="adjustment">
+      <created>1702608668495</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1702608668495</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +162,7 @@
     <MESSAGE value="TODO 4" />
     <MESSAGE value="TODO 5" />
     <MESSAGE value="timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="timer" />
+    <MESSAGE value="adjustment" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjustment" />
   </component>
 </project>
