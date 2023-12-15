@@ -13,6 +13,7 @@ package sudoku;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
+
 /**
  * The Cell class model the cells of the Sudoku puzzle, by customizing (subclass)
  * the javax.swing.JTextField to include row/column, puzzle number and status.
@@ -22,7 +23,6 @@ public class Cell extends JTextField {
 
     // Define named constants for JTextField's colors and fonts
     //  to be chosen based on CellStatus
-    private int wrongGuesses;
     public static final Color BG_GIVEN = new Color(240, 240, 240); // RGB
     public static final Color FG_GIVEN = Color.BLACK;
     public static final Color FG_NOT_GIVEN = Color.BLACK;

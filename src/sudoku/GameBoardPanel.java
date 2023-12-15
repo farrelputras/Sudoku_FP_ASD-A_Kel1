@@ -120,10 +120,16 @@ public class GameBoardPanel extends JPanel {
             int numberIn;
             try {
                 numberIn = Integer.parseInt(sourceCell.getText());
+                if (numberIn < 1 || numberIn > 9) {
+                    JOptionPane.showMessageDialog(null, "Please enter a number between 1 and 9.");
+                    return;
+                }
             } catch (NumberFormatException ex) {
                 // Handle jika input bukan angka
+                JOptionPane.showMessageDialog(null, "Please enter a valid number.");
                 return;
             }
+
 
             System.out.println("You entered " + numberIn);
 
