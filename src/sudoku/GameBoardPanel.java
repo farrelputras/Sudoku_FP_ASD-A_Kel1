@@ -89,9 +89,6 @@ public class GameBoardPanel extends JPanel {
         super.setBorder(new LineBorder(Color.BLACK, 3));
     }
 
-
-
-
     public void newGame() {
         puzzle.newPuzzle(2);
         totalSeconds = 0; // Reset the timer when starting a new game

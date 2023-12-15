@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="adjustment">
-      <change afterPath="$PROJECT_DIR$/src/sudoku/Solve.java" afterDir="false" />
+    <list default="true" id="dcd1b9bd-f54a-4a00-8bd5-71fec3fec494" name="Changes" comment="solver unfinished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/Puzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/Puzzle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sudoku/SudokuMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702608668495</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="solver unfinished">
+      <created>1702627017764</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1702627017764</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,6 +166,7 @@
     <MESSAGE value="TODO 5" />
     <MESSAGE value="timer" />
     <MESSAGE value="adjustment" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjustment" />
+    <MESSAGE value="solver unfinished" />
+    <option name="LAST_COMMIT_MESSAGE" value="solver unfinished" />
   </component>
 </project>
