@@ -73,11 +73,7 @@ public class SudokuMain extends JFrame {
                 JDialog dialog = optionPane.createDialog(SudokuMain.this, "About");
 
                 dialog.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        // Restart the game when the dialog is closed
-                        board.newGame();
-                    }
+
                 });
 
                 dialog.setVisible(true);
