@@ -32,7 +32,6 @@ public class Puzzle {
                 isGiven[row][col] = false;
             }
         }
-
         solve();
         setGuesses(cellsToGuess);
     }

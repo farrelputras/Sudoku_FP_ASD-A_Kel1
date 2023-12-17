@@ -12,6 +12,8 @@ package sudoku;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
+
 
 public class SudokuMain extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -44,6 +46,46 @@ public class SudokuMain extends JFrame {
 
         cp.add(mainPanel, BorderLayout.CENTER);
 
+        JMenuBar menuBar = new JMenuBar();
+        JMenuItem aboutMenuItem = new JMenuItem("About");
+        aboutMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
+
+        aboutMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ImageIcon icon = new ImageIcon("group1.jpg");
+
+                ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(board.getWidth(), board.getHeight(), Image.SCALE_SMOOTH));
+
+                JLabel imageLabel = new JLabel(scaledIcon);
+                imageLabel.setPreferredSize(new Dimension(board.getWidth(), board.getHeight()));
+
+                JLabel textLabel = new JLabel("<html><center>Sudoku Game<br>Version 1.0<br>Created by Group 1</center></html>");
+                textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+                JPanel textPanel = new JPanel(new BorderLayout());
+                textPanel.add(imageLabel, BorderLayout.CENTER);
+                textPanel.add(textLabel, BorderLayout.SOUTH);
+
+
+                JOptionPane optionPane = new JOptionPane(textPanel, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{});
+                JDialog dialog = optionPane.createDialog(SudokuMain.this, "About");
+
+                dialog.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        // Restart the game when the dialog is closed
+                        board.newGame();
+                    }
+                });
+
+                dialog.setVisible(true);
+            }
+        });
+
+        menuBar.add(Box.createHorizontalGlue()); // Untuk menempatkan menu "About" di tengah
+        menuBar.add(aboutMenuItem);
+        setJMenuBar(menuBar);
+
         board.startTimer();
         board.newGame();
 
@@ -51,6 +93,7 @@ public class SudokuMain extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Sudoku");
         setVisible(true);
+        setResizable(false);
     }
 
     public GameBoardPanel getGameBoardPanel() {

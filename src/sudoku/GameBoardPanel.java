@@ -154,7 +154,6 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-
     public void startTimer() {
         timer.start();
     }
