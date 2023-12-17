@@ -40,7 +40,9 @@ public class SudokuMain extends JFrame {
 
         JButton btnNewGame = new JButton("New Game");
         btnNewGame.addActionListener(e -> {
-            board.newGame();
+            String selectedDifficulty = (String) board.getDifficultyComboBox().getSelectedItem();
+            board.handleDifficultyChange(selectedDifficulty);
+            board.resetPoints();
         });
         mainPanel.add(btnNewGame, BorderLayout.SOUTH);
 
@@ -87,7 +89,7 @@ public class SudokuMain extends JFrame {
         setJMenuBar(menuBar);
 
         board.startTimer();
-        board.newGame();
+//        board.handleDifficultyChange();
 
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

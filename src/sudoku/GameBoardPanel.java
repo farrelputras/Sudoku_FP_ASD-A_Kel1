@@ -19,6 +19,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 public class GameBoardPanel extends JPanel {
+    public JComboBox<String> getDifficultyComboBox() {
+        return difficultyComboBox;
+    }
+
     private static final long serialVersionUID = 1L;
     public static final int CELL_SIZE = 60;
     public static final int BOARD_SIZE = CELL_SIZE * SudokuConstants.GRID_SIZE;
@@ -32,14 +36,21 @@ public class GameBoardPanel extends JPanel {
     private JLabel timerLabel;
     private JPanel timerPanel = new JPanel();
     private JPanel sudokuGrid = new JPanel();
-
     private int wrongGuessCount;
+    private JComboBox<String> difficultyComboBox;
+    public int cellsToGuess;
+    private int points;
+    private JLabel pointsLabel;
 
     public GameBoardPanel() {
         super.setLayout(new BorderLayout());
         wrongGuessCount = 0; //reset the wrong counter
         super.add(timerPanel, BorderLayout.NORTH);
         super.add(sudokuGrid, BorderLayout.CENTER);
+        JPanel pointsPanel = new JPanel();
+        pointsLabel = new JLabel("Points: 0");
+        pointsPanel.add(pointsLabel);
+        super.add(pointsPanel, BorderLayout.EAST);
 
         sudokuGrid.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));
 
@@ -87,10 +98,26 @@ public class GameBoardPanel extends JPanel {
         // Set preferred size and border of the entire panel
         super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         super.setBorder(new LineBorder(Color.BLACK, 3));
+
+        String[] difficultyOptions = {"Easy", "Medium", "Hard"};
+        difficultyComboBox = new JComboBox<>(difficultyOptions);
+        difficultyComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
+                String selectedDifficulty = (String) comboBox.getSelectedItem();
+                handleDifficultyChange(selectedDifficulty);
+            }
+        });
+
+        // Tambahkan komponen ke panel timerPanel
+        timerPanel.add(difficultyComboBox);
+        handleDifficultyChange("Medium");
+        difficultyComboBox.setSelectedItem("Medium");
     }
 
-    public void newGame() {
-        puzzle.newPuzzle(2);
+    public void newGame(int cellsToGuess) {
+        puzzle.newPuzzle(cellsToGuess);
         totalSeconds = 0; // Reset the timer when starting a new game
 
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
@@ -151,7 +178,24 @@ public class GameBoardPanel extends JPanel {
                 JOptionPane.showMessageDialog(null, "Congratulations! You solved the puzzle!");
                 stopTimer();
             }
+            if (numberIn == sourceCell.number) {
+                sourceCell.status = CellStatus.CORRECT_GUESS;
+                points++; // Tambah poin jika jawaban benar
+            } else {
+                sourceCell.status = CellStatus.WRONG_GUESS;
+                points--; // Kurangi poin jika jawaban salah
+                // Cek apakah sudah mencapai 5 kesalahan
+                if (wrongGuessCount >= 5) {
+                    handleGameOver();
+                }
+            }
+            sourceCell.paint();
+
+            updatePointsLabel(); // Update label poin
+
+            // ... (kode setelahnya)
         }
+
     }
 
     public void startTimer() {
@@ -170,9 +214,47 @@ public class GameBoardPanel extends JPanel {
     }
     private void handleGameOver() {
         JOptionPane.showMessageDialog(null, "Game Over! You've made 5 wrong guesses. Starting a new game.");
-        newGame();  // Memulai permainan baru setelah mencapai batas kesalahan
+        newGame(cellsToGuess);  // Memulai permainan baru setelah mencapai batas kesalahan
+        resetPoints();
+        resetColumnColors();
         wrongGuessCount = 0;  // Mereset jumlah kesalahan
     }
+
+    private void resetColumnColors() {
+        for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
+            for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
+                cells[row][col].resetBackgroundColor();
+            }
+        }
+    }
+    public void handleDifficultyChange(String selectedDifficulty) {
+        int cellsToGuess;
+        switch (selectedDifficulty) {
+            case "Hard":
+                cellsToGuess = (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 16;
+                break;
+            case "Medium":
+                cellsToGuess = (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 8;
+                break;
+            case "Easy":
+                cellsToGuess = (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 4;
+                break;
+            default:
+                cellsToGuess = (SudokuConstants.GRID_SIZE * SudokuConstants.GRID_SIZE) / 8; // Default to Medium
+                break;
+        }
+
+        // Reset game with the new difficulty
+        newGame(cellsToGuess);
+    }
+    private void updatePointsLabel() {
+        pointsLabel.setText("Points: " + points);
+    }
+    void resetPoints() {
+        points = 0;
+        updatePointsLabel();
+    }
+
 
 
 }

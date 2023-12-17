@@ -89,4 +89,9 @@ public class Cell extends JTextField {
             super.setBackground(BG_WRONG_GUESS);
         }
     }
+    public void resetBackgroundColor() {
+        if (status == CellStatus.WRONG_GUESS) {
+            super.setBackground(Cell.BG_TO_GUESS);
+        }
+    }
 }
