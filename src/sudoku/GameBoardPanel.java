@@ -50,7 +50,7 @@ public class GameBoardPanel extends JPanel {
         JPanel pointsPanel = new JPanel();
         pointsLabel = new JLabel("Points: 0");
         pointsPanel.add(pointsLabel);
-        super.add(pointsPanel, BorderLayout.EAST);
+        super.add(pointsPanel, BorderLayout.SOUTH);
 
         sudokuGrid.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));
 

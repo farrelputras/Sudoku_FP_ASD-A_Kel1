@@ -38,30 +38,31 @@ public class SudokuMain extends JFrame {
         board = new GameBoardPanel();
         mainPanel.add(board, BorderLayout.CENTER);
 
-        JButton btnNewGame = new JButton("New Game");
-        btnNewGame.addActionListener(e -> {
+        cp.add(mainPanel, BorderLayout.CENTER);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu game = new JMenu("Game");
+        JMenuItem newGame = new JMenuItem("New Game");
+        JMenuItem aboutMenuItem = new JMenuItem("About");
+
+        newGame.addActionListener(e -> {
             String selectedDifficulty = (String) board.getDifficultyComboBox().getSelectedItem();
             board.handleDifficultyChange(selectedDifficulty);
             board.resetPoints();
         });
-        mainPanel.add(btnNewGame, BorderLayout.SOUTH);
-
-        cp.add(mainPanel, BorderLayout.CENTER);
-
-        JMenuBar menuBar = new JMenuBar();
-        JMenuItem aboutMenuItem = new JMenuItem("About");
-        aboutMenuItem.setHorizontalAlignment(SwingConstants.CENTER);
-
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ImageIcon icon = new ImageIcon("group1.jpg");
 
-                ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(board.getWidth(), board.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(400,300, Image.SCALE_SMOOTH));
 
                 JLabel imageLabel = new JLabel(scaledIcon);
-                imageLabel.setPreferredSize(new Dimension(board.getWidth(), board.getHeight()));
+                imageLabel.setPreferredSize(new Dimension(400, 300));
 
-                JLabel textLabel = new JLabel("<html><center>Sudoku Game<br>Version 1.0<br>Created by Group 1</center></html>");
+                JLabel textLabel = new JLabel("<html><center>Sudoku<br>Version 1.0<br>Created by Group 1<br>" +
+                        "5026221035 - Mufidhatul Nafisa<br>" +
+                        "5026221120 - M. Shalahuddin Arif Laksono<br>" +
+                        "5026221102 - Fernandio Farrel Putra S.</center></html>");
                 textLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
                 JPanel textPanel = new JPanel(new BorderLayout());
@@ -80,12 +81,12 @@ public class SudokuMain extends JFrame {
             }
         });
 
-        menuBar.add(Box.createHorizontalGlue()); // Untuk menempatkan menu "About" di tengah
-        menuBar.add(aboutMenuItem);
+        menuBar.add(game);
+        game.add(newGame);
+        game.add(aboutMenuItem);
         setJMenuBar(menuBar);
 
         board.startTimer();
-//        board.handleDifficultyChange();
 
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
